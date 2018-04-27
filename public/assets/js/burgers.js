@@ -8,7 +8,7 @@ $("#createburger").on("submit", function(event) {
     };
 
     // Send the POST request.
-    $.ajax("/burger", {
+    $.ajax("/create", {
       type: "POST",
       data: newburger
     }).then(

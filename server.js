@@ -50,13 +50,13 @@ app.get("/", function(req, res) {
 });
 
 // Create a new burger
-app.post("/burger", function(req, res) {
+app.post("/create", function(req, res) {
   connection.query("INSERT INTO burgers (burger_name) VALUES ??", [req.params.burger_name], function(err, result) {
     if (err) {
       return res.status(500).end();
     }
 
-    res.redirect("/");
+    res.json("/");
   });
 });
 
