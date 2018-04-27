@@ -19,7 +19,7 @@ router.get("/", function(req, res) {
   
   // Create a new burger
   router.post("/burger", function(req, res) {
-    connection.query("INSERT INTO burgers (burger_name) VALUES ??", [req.params.burger_name], function(err, result) {
+    connection.query("INSERT INTO burgers (burger_name) VALUES ??", [req.params.newburger], function(err, result) {
       if (err) {
         return res.status(500).end();
       }

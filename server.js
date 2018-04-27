@@ -56,7 +56,7 @@ app.post("/burger", function(req, res) {
       return res.status(500).end();
     }
 
-    res.json({ id: result.insertId });
+    res.redirect("/");
   });
 });
 
@@ -69,6 +69,7 @@ app.get("/burgers", function(req, res) {
     }
 
     res.json(data);
+
   });
 });
 
