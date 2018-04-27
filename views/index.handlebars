@@ -1,37 +1,27 @@
 <div class="container">
   <div class="row">
-    <div class="col sm12">
+    <div class="col s12">
       <h1>Eat-Da-Burger!</h1>
-      <img src="../public/assets/images/burger.png" width="300px">
+      <img src="http://cdn.onlinewebfonts.com/svg/img_478376.png" width="300px" class="center">
     </div>
   </div>
 </div>
 
 <div class="container">
   <div class="row">
-    <div class="col sm6">
+    <div class="col s6 offset-s3">
       <h3>Devour these burgers!</h3>
+      <form id="updateburger">
       <table>
         {{#each burgers}}
         <tr>
           <td>{{id}}</td>
           <td>{{burger_name}}</td> 
-          <td><button>Devour!</button></td>
+          <td><button data-burgerid="{{this.id}}" type="submit" class="delburger">Devour!</button></td>
         </tr>
         {{/each}}
       </table>
-    </div>
-    <div class="col sm6">
-      <h3>Burgers you've devoured!</h3>
-      <table>
-        {{#each burgers}}
-        <tr>
-          <td>{{id}}</td>
-          <td>{{burger_name}}</td> 
-          <td><button>Devour!</button></td>
-        </tr>
-        {{/each}}
-      </table>
+      </form>
     </div>
   </div>
 </div>
@@ -39,11 +29,11 @@
 <div class="container">
   <div class="row">
     <div class="col s12">
-        <h2>Add a Burger</h2>
-        <form action="/" method="POST" class="create-form">
+        <h3>Add a Burger</h3>
+        <form action="/" method="POST" class="create-form" id="createburger">
           <div class="form-group">
             <label for="ca">Burger Name:</label>
-            <input type="text" name="newburger">
+            <input type="text" name="newburger" id="newburger">
           </div>
           <button type="submit">Add Burger</button>
         </form>

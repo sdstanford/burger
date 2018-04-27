@@ -6,6 +6,8 @@ body{
 
 .container{
     background-color: white;
+    padding-bottom: 10px;
+    align-content: center;
 }
 
 table, th, td {
@@ -14,4 +16,16 @@ table, th, td {
 
 h3{
     font-size:20px;
+    text-align: center;
+}
+
+h1{
+    text-align: center;
+}
+
+.center{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
 }

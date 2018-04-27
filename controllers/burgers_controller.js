@@ -2,44 +2,59 @@ var express = require("express");
 
 var router = express.Router();
 
-// Create all our routes and set up logic within those routes where required.
 router.get("/", function(req, res) {
-  burger.all(function(data) {
-    var hbsObject = {
-      burger: data
-    };
-    console.log(hbsObject);
-    res.render("index", hbsObject);
+    connection.query("SELECT * FROM burgers;", function(err, data) {
+      if (err) {
+        return res.status(500).end();
+      }
+
+      var hbsObject = {
+            burger: data
+        };
+        console.log(hbsObject);
+        res.render("index", hbsObject);
+
+    });
   });
-});
-
-router.post("/api/burger", function(req, res) {
-  burger.create([
-    "burger_name", "devoured"
-  ], [
-    req.body.burger_name, req.body.devoured
-  ], function(result) {
-    // Send back the ID of the new burger
-    res.json({ id: result.insertId });
+  
+  // Create a new burger
+  router.post("/burger", function(req, res) {
+    connection.query("INSERT INTO burgers (burger_name) VALUES ??", [req.params.burger_name], function(err, result) {
+      if (err) {
+        return res.status(500).end();
+      }
+  
+      res.json({ id: result.insertId });
+    });
   });
-});
-
-// router.put("/api/burger/:id", function(req, res) {
-//   var condition = "id = " + req.params.id;
-
-//   console.log("condition", condition);
-
-//   burger.update({
-//     devoured: req.body.devoured
-//   }, condition, function(result) {
-//     if (result.changedRows == 0) {
-//       // If no rows were changed, then the ID must not exist, so 404
-//       return res.status(404).end();
-//     } else {
-//       res.status(200).end();
-//     }
-//   });
-// });
+  
+  //MYSQL ROUTES
+  //Get all Burgers
+  router.get("/burgers", function(req, res) {
+    connection.query("SELECT * FROM burgers;", function(err, data) {
+      if (err) {
+        return res.status(500).end();
+      }
+  
+      res.json(data);
+    });
+  });
+  
+  //DEVOUR BURGER
+  router.delete("/burgers/:id", function(req, res) {
+    connection.query("DELETE FROM burgers WHERE id = ?", [req.params.id], function(err, result) {
+      if (err) {
+        // If an error occurred, send a generic server failure
+        return res.status(500).end();
+      }
+      else if (result.changedRows === 0) {
+        // If no rows were changed, then the ID must not exist, so 404
+        return res.status(404).end();
+      }
+      res.status(200).end();
+  
+    });
+  });
 
 // Export routes for server.js to use.
 module.exports = router;
